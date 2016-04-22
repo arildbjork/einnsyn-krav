@@ -1,25 +1,80 @@
-## Detaljering av EPOS 1 – Overføre data {#detaljering-av-epos-1-overf-re-data}
+# Oppgåveliste sprint 6
+	
+## ASiC-bibliotek
 
-### eInnsyn 1.1 
-Som innhaldsleverandør ønsker vi å kunne overføre data i formata Noark4 og Noark5
+* Biblotek for pakking av json-ld og innsynsxml inn i ASiC-container
+ 	* Skal innehalde payload, orgnr avsendar, orgnr mottakar og tekststreng som definerar tyep
 
-### eInnsyn 1.2 
-Som _innhaldsleverandør_ ønsker vi å kunne overføre data i samsvar med DTD for offentleg journal i Noark4-standarden og xml-skjema for offentleg journal i Noark5-standarden slik at vi oppfyller kravet om tilgjengeleggjering av offentleg journal på Internett (offentlegforskrifta § 6)
+ * Bibliotek for reversering av overliggande
 
-### eInnsyn 1.3 
-Som _innhaldsleverandør_ ønsker vi å kunne **overføre full Noark5 datamodell**
+ * Applikasjon som brukar overliggande og som sender/mottar med Mock-api. API er under definisjonsarbeid
 
-### eInnsyn 1.4 
-Som _innhaldsleverandør_ ønsker vi **automatisert overføring av data til eInnsyn** slik at vi effektiviserer overføringsprosessen
+## Reception
 
-### eInnsyn 1.5 
-Som _innhaldsleverandør_ ønsker vi **automatisert validering/ kvalitetskontroll av data som vert overført til eInnsyn** slik at vi effektivt kan avdekke feil
+ * Split/Dupliser dagens reception i "Avsendar"/"Mottak"-applikasjonar
+ 	* Avsendar:
+		1. Dagens input-api
+		2. Validering
+		3. Konvertering
+		4. Beriking (Kor "dumt" kan dette api-et gjerast? Mulighet for lett å legge til å ta bort berikingstenester)
+		5. Send til/motta frå OEP
 
-### eInnsyn 1.6 
-Som _forvaltar/ innhaldsleverandør_ ønsker vi **logging av dataoverføring til eInnsyn** slik at vi kan spore aktivitet
+	* Mottakar:
+		1. Motta frå/Send til innholdsleverandør
+		2. Validering (Kanskje ?)
+		3. Dump rådata
+		4. Beriking
+		5. Lagre til SD/ES
 
-### eInnsyn 1.7 
-Som _innhaldsleverandør_ ønsker vi **automatisert publisering av fulltekstdokument** slik at vi kan redusere tal innsynskrav som må behandlast
+## Innsynskomponent
+ 	* Definering og lagring av innsynsbegjeringar
+		* Innsynsbegjering bør inneholde:
+			* Journalpostid
+			* Orgnr ansvarleg organisasjon
+			* Tidspunkt
+			* Kontaktinfo til den som har bedt om innsyn
+	
+	* Skal motta Innsynsbegjering frå frontend
+	* Lagre for rapportering og seinare bruk
+	* Bygge opp innsynsxml
+	* Sende til ansvarleg organisasjon
 
-### eInnsyn 
-1.8 Som _forvaltar_ ønsker vi å kunne **ta i mot data frå både kommunal og statleg sektor** slik at statlege verksemder, kommunar og fylkeskommunar kan bruke den nye løysinga
+			
+## Multi-server arkitektur
+	1. Sette opp Docker overlay-network
+	2. Consul
+	3. Docker-Swarm
+
+## Definere datamodell
+	* Datamodel som er journalpost-sentrisk
+	* Skal kunne vere dynamisk på kva som vert lagt til
+		* Skal kunne lagre Noark data både med og utan arkiv-hierarki
+		* Skal kunne hantere ulik type berrikingsdata
+	* Bør nok representerast både gjennom SHAQL og meir "visuelt"
+
+
+## Skille ut bibliotek som skal delast med OK
+	* Bestille publik repo
+	* Endre bygging/mvn for å handtere dette
+
+## Støtte for versjonering/release for docker-bygging
+	* I dag brukar me kun "latest" tag. Legge inn unstable/stable evt relase-taggar
+
+## Sette opp fleire testmiljø
+	* Inttest
+	* Eksternt tilgjengeleg testmiljø (Avhengig av tagging av stabile bygg i docker)
+
+
+
+
+To get started enter a title for your note above. When you're ready to save
+your note just use Vim's :write or :update commands, a filename will be picked
+automatically based on the title.
+
+                                    * * *
+
+The notes plug-in comes with self hosting documentation. To jump to these notes
+position your cursor on the highlighted name and press `gf' in normal mode:
+
+ * Note taking syntax
+ * Note taking commands
