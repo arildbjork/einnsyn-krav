@@ -78,3 +78,5 @@ position your cursor on the highlighted name and press `gf' in normal mode:
 
  * Note taking syntax
  * Note taking commands
+
+## Test - slett denne endringen
